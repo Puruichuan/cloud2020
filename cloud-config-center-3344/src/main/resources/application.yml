@@ -1,0 +1,14 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center #注册到eureka服务上的微服务名称
+#  cloud:
+#    config:
+
+#服务注册到eureka上面
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka

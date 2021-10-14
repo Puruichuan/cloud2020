@@ -1,0 +1,37 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/SpringCloud2020?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer，默认为true
+    register-with-eureka: true
+    #是否从EurekaServer抓取已有的注册信息，默认为true，单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #单机版Eureka
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  #集群版Eureka
+  instance:
+    #该配置是主机名称的规范和修改
+    instance-id: payment8001
+    #访问信息有IP地址的显示
+    prefer-ip-address: true
+    #Eureka客户端向服务端发送心跳时间间隔，单位为妙（s），默认30秒
+    lease-renewal-interval-in-seconds: 1
+    #Eureka服务端在收到最后一次收到心跳后等待时间上限，单位为妙，默认时间为90秒，超时将剔除服务
+    lease-expiration-duration-in-seconds: 2
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.atguigu.springcloud.entities   #所有Entity别名类所在包
